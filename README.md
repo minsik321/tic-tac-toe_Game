@@ -65,6 +65,6 @@ AI 난이도(쉬움/중간/어려움)를 선택할 수 있으며, **Minimax 알�
 ## 예외 처리 화면
 
 ![예외 처리 화면](./docs/Exception.gif)
-![예외 처리 콘솔](./docs/ExceptionPicture.jpg)
+![예외 처리 콘솔](./docs/ExceptionPicture.JPG)
 
 ---
