@@ -201,7 +201,7 @@ public class TicTacToeGame extends JFrame {
         try {
         	if (board.getCell(position) != Board.EMPTY) {
                 // isClicked 플래그가 제대로 작동하지 않았을 때 예외를 발생시킵니다.
-                throw new IllegalStateException("이미 심볼이 놓인 칸(" + position + ")을 선택했습니다.");
+                throw new InvalidMoveException("이미 심볼이 놓인 칸(" + position + ")을 선택했습니다.");
             }
         
         // 플레이어 이동
@@ -252,7 +252,7 @@ public class TicTacToeGame extends JFrame {
     		
         int aiMove = aiPlayer.makeMove(board);
         if (aiMove == -1) { // aiMove가 -1일 경우 예외 발생
-            throw new IllegalStateException("AI가 둘 수 있는 유효한 수를 찾지 못했습니다. (makeMove가 -1 반환)");
+            throw new InvalidMoveException("AI가 둘 수 있는 유효한 수를 찾지 못했습니다. (makeMove가 -1 반환)");
         }
             board.makeMove(aiMove, aiSymbol);
             buttons[aiMove].setText(String.valueOf(aiSymbol));
