@@ -196,7 +196,7 @@ public class TicTacToeGame extends JFrame {
     
     // 게임 보드 칸에 버튼이 눌리면 해당 함수가 동작함. AI의 차례이면 플레이어 입력 무시, 이미 X나 O가 있는 칸이면 무시
     private void handlePlayerMove(int position) {
-        if (!gameActive || isClicked[position]) return;
+        if (!gameActive ) return;
         // 이미 채워진 칸을 선택하면 예외 발생
         try {
         	if (board.getCell(position) != Board.EMPTY) {
@@ -224,8 +224,15 @@ public class TicTacToeGame extends JFrame {
         statusLabel.setText("AI가 생각 중...");
         
         startAIMoveTimer();
-        } catch (IllegalStateException e) {
-        	System.err.println("치명적인 로직 오류: " + e.getMessage());
+        } catch (InvalidMoveException e) {
+        	System.err.println("로직 오류: " + e.getMessage());
+            //팝업으로 경고
+            javax.swing.JOptionPane.showMessageDialog(
+                null,                   // 부모 컴포넌트 (null이면 화면 중앙)
+                "이미 선택한 칸입니다!",   	// 메시지
+                "잘못된 선택",           	// 타이틀
+                javax.swing.JOptionPane.WARNING_MESSAGE // 경고 아이콘
+            );
         }
     }
  
@@ -268,7 +275,7 @@ public class TicTacToeGame extends JFrame {
             statusLabel.setText("당신의 차례입니다 (" + humanSymbol + ")");
             gameActive = true;
         }
-    	} catch (IllegalStateException e) { // 심각한 로직 오류 경고 및 게임 정지
+    	} catch (InvalidMoveException e) {
     		System.err.println("로직 오류 발생 (AI): " + e.getMessage()); 
     		statusLabel.setText("게임 오류 발생. (재시작 필요)");
     		gameActive = false; 
